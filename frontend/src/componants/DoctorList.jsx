@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import './search.css'
+
 const DoctorList = (props) => {
 
     let doctors = props.doctors
@@ -13,13 +15,13 @@ const DoctorList = (props) => {
     }
 
     return (
-      <div>
+      <div className="doctor-card-container">
         {doctors.map((doctor, index) => (
-          <div key={index} onClick={() => {handleOnClick(doctor)}} style={{margin: '30px'}}>
-            <h3>Name : {doctor.name}</h3>
-            <span>Location: {doctor.venue}</span>
-            <span>Specialty: {doctor.speciality}</span>
-            <span>Email: {doctor.email}</span>
+          <div key={index} onClick={() => {handleOnClick(doctor)}} className="doctor-card">
+            <h3 style={{fontWeight: "600"}}>Name : {doctor.name}</h3>
+            <span style={{margin: "10px"}}>Location: {doctor.venue}</span>
+            <span style={{margin: "10px"}}>Specialty: {doctor.speciality}</span>
+            <span style={{margin: "10px"}}>Email: {doctor.email}</span>
           </div>
         ))}
       </div>

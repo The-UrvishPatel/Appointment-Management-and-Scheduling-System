@@ -71,7 +71,11 @@ const cancel = async (req, res) => {
 
     const { appointmentID } = req.body
 
-    let result = Models.Appointment.findOneAndDelete(appointmentID);
+    // console.log(">>>>", appointmentID)
+
+    let result = await Models.Appointment.findOneAndDelete({_id: appointmentID});
+
+    console.log(result)
 
     // const page = Number(req.query.page) || 1;
     // const limit = Number(req.query.limit) || 10;

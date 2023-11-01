@@ -7,10 +7,38 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import AppointmentList from "./AppointmentList";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Footer from './Footer'
+import Navbar from './Navbar'
+import './calendar.css'
+import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 
 export default function Calendar(props) {
 
   const navigate = useNavigate()
+
+  let tokenOwner = "";
+    let dataToSend = {id: "", type: ""};
+
+    const patientID = localStorage.getItem("unity-patient-id");
+    const doctorID = localStorage.getItem("unity-doctor-id");
+
+    if (patientID || doctorID) {
+
+      if (patientID) {
+        dataToSend["id"] = patientID
+        dataToSend["type"] = "patient";
+        tokenOwner = "patient";
+      } else {
+        dataToSend["id"] = doctorID
+        dataToSend["type"] = "doctor";
+        tokenOwner = "doctor";
+      }
+    }
+    else
+    {
+      navigate('/')
+    }
+
 
   function compareDates(dateStr1, dateStr2) {
     const [day1, month1, year1] = dateStr1.split('-').map(Number);
@@ -41,37 +69,22 @@ export default function Calendar(props) {
   const deleteAppointment = async (appointmentID) => {
     // const updatedAppointments = appointments.filter((appointment) => appointment._id !== appointmentId);
     // setAppointments(updatedAppointments);
-
+    // console.log("hey")
     await axios.post("http://127.0.0.1:5000/appointment/cancel", {appointmentID})
-    window.location.reload()
+    
+    axios.post(`http://127.0.0.1:5000/appointment/list`, dataToSend)
+      .then((response) => {
+        console.log(response)
+        setAppointments(response.data.appointments);
+      })
+      .catch((err) => {
+        console.log(err, "Some error occurred");
+      });
   }
 
   useEffect(() => {
     // Fetch appointments from the API here and set them using setAppointments
     // Example:
-    let tokenOwner = "";
-    let dataToSend = {id: "", type: ""};
-
-    const patientID = localStorage.getItem("unity-patient-id");
-    const doctorID = localStorage.getItem("unity-doctor-id");
-
-    if (patientID || doctorID) {
-
-      if (patientID) {
-        dataToSend["id"] = patientID
-        dataToSend["type"] = "patient";
-        tokenOwner = "patient";
-      } else {
-        dataToSend["id"] = doctorID
-        dataToSend["type"] = "doctor";
-        tokenOwner = "doctor";
-      }
-    }
-    else
-    {
-      navigate('/')
-    }
-
     axios.post(`http://127.0.0.1:5000/appointment/list`, dataToSend)
       .then((response) => {
         console.log(response)
@@ -106,7 +119,11 @@ export default function Calendar(props) {
 
   return (
     <>
-    {console.log(initialDate)}
+    {/* {console.log(initialDate)} */}
+    <Navbar/>
+    <div className="calendar-container">
+    
+    <h2 className="title">Calendar</h2>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DateCalendar"]}>
           <DateCalendar
@@ -118,8 +135,10 @@ export default function Calendar(props) {
           />
         </DemoContainer>
       </LocalizationProvider>
-      {console.log("calling")}
+      {/* {console.log("calling")} */}
+      </div>
       <AppointmentList data={filteredAppointments} deleteAppointment={deleteAppointment} />
+      <Footer />
     </>
   );
 }

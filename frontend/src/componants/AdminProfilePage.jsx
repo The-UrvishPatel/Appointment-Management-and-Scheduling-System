@@ -5,6 +5,7 @@ import axios from "axios";
 import "./admin-profile-page.css"
 import DoctorsListCard from "./DoctorsListCard";
 import TodayAppointmentList from "./TodayAppointmentList";
+import Footer from './Footer'
 
 
 export default function AdminProfilePage() {
@@ -66,7 +67,7 @@ export default function AdminProfilePage() {
         <TodayAppointmentList />
 
       </div>
-
+      {/* <Footer /> */}
     </div>
 
   );

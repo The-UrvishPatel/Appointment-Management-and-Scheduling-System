@@ -3,12 +3,27 @@ import themeTypography from "../utils/typography";
 import { useSelector } from "react-redux";
 import LaunchButton from "./LaunchButton"
 import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
+import Navbar from "./Navbar";
 
 function LandingPage() {
 
   const navigate = useNavigate()
   
-  let isPatient = false;
+  const [isPatient, setIsPatient] = useState(false)
+
+  useEffect(() => {
+    
+    (localStorage.getItem('unity-jwt-patient') ? setIsPatient(true) : setIsPatient(false))
+    
+
+    // return () => {
+    //   second
+    // }
+
+  }, [])
+  
+
 
   // const isAuth = useSelector((state) => {
   //   return state.users.isAuthenticated;
@@ -18,11 +33,11 @@ function LandingPage() {
 
   return (
     <>
+    {/* <Navbar /> */}
       {/* {!isLoading ? (
         <Loading />
       ) : ( */}
         <Box>
-          {(localStorage.getItem('unity-jwt-patient') ? isPatient=true : isPatient=false)}
           <Container sx={{ height: "100vh", background: "#f8f5fc" }}>
             <Stack sx={{ height: "inherit" }} justifyContent="center">
               <Typography

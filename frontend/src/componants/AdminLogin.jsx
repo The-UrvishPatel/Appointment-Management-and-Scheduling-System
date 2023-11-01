@@ -4,6 +4,7 @@ import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { Vortex } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { MDBTabs } from "mdb-react-ui-kit";
+import Footer from './Footer'
 
 export default function AdminLogin() {
   console.log("INiside the Admin login")
@@ -145,6 +146,7 @@ export default function AdminLogin() {
           </MDBBtn>
         </form>
       </MDBTabs>
+      <Footer />
     </div>
   );
 }

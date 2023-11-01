@@ -3,7 +3,7 @@ import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import axios from "axios";
 import { Vortex } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
-
+import "./form.css"
 
 export default function PatientRegistration() {
   const navigate = useNavigate();
@@ -308,18 +308,22 @@ export default function PatientRegistration() {
         ))}
       </select>
       {errors.gender.state ? <div className="error-message" >Please select your gender</div> : null}
-      <div>
-        <label >Disability:</label>
-      <span className="form-check form-check-inline">
-  <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-  <label className="form-check-label" htmlFor="inlineRadio1">Yes</label>
-</span>
+      
+      <div className="mt-4 form-disability">
 
-<span className="form-check form-check-inline">
-  <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" defaultChecked/>
-  <label className="form-check-label" htmlFor="inlineRadio2">No</label>
-</span>
-</div>
+        <label>Disability: </label>
+        
+        <span className="form-check form-check-inline">
+          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+          <label className="form-check-label" htmlFor="inlineRadio1">Yes</label>
+        </span>
+
+        <span className="form-check form-check-inline">
+          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" defaultChecked/>
+          <label className="form-check-label" htmlFor="inlineRadio2">No</label>
+        </span>
+
+      </div>
 
       {/* <MDBInput
         label="Birth Date"
@@ -346,7 +350,7 @@ export default function PatientRegistration() {
           <div className="error-message" >Please provide your college completion year</div>
         ) : null} */}
       
-      <MDBBtn type="submit" className="mt-4" block>
+      <MDBBtn type="submit" className="mt-4" style={{backgroundColor: "#471e75", borderTopLeftRadius: "0px", borderTopRightRadius: "0px" }} block>
       {isLoading ? (
             <Vortex
               visible={true}

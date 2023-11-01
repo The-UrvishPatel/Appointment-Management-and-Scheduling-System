@@ -7,6 +7,8 @@ import dayjs from "dayjs";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
 import './slots.css'
+import Navbar from './Navbar'
+import Footer from './Footer'
 
 function ChooseSlots() {
   let endTime = 20;
@@ -16,7 +18,7 @@ function ChooseSlots() {
   const [data, setData] = useState([]);
 
   const handleChange = (e) => {
-    console.log(e);
+    // console.log(e);
     setDate(e);
   };
 
@@ -24,7 +26,7 @@ function ChooseSlots() {
     let target = e.target.innerText;
     console.log("targeeeeeeeeeeeeeee",target.split(' ')[0]);
 
-    if(target.split(' ')[0].includes(dataArray)){
+    if(dataArray.includes(dataArray)){
         alert("Selected time slot is not available choose another");
     } else {
         let response = window.prompt("Please give any specific issue if you want and book appointment")
@@ -64,11 +66,11 @@ function ChooseSlots() {
       await axios
         .post("http://127.0.0.1:5000/appointment/list", dataToSend)
         .then((response) => {
-          console.log(response.data.appointments);
+          // console.log(response.data.appointments);
           setData(response.data.appointments);
         })
         .catch((errr) => {
-          console.log("Err", errr);
+          // console.log("Err", errr);
         });
     };
     fetchData();
@@ -103,6 +105,7 @@ function ChooseSlots() {
 
   return (
     <>
+      <Navbar/>
       <div className="div1">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["DateCalendar"]}>
@@ -117,7 +120,7 @@ function ChooseSlots() {
         </LocalizationProvider>
       </div>
       <div className="div2">
-        {console.log("inside the available")}
+        {/* {console.log("inside the available")} */}
         {timeIntervals.map((interval, index) => (
           <div
             key={index}
@@ -127,12 +130,14 @@ function ChooseSlots() {
                 : "clickable"
             }
             onClick={handleClickEvent}
+            style={{cursor: "pointer"}}
           >
             {interval}
           </div>
         ))}
-        {console.log("hehehehehe",date)}
+        {/* {console.log("hehehehehe",date)} */}
       </div>
+      <Footer />
     </>
   );
 }

@@ -25,112 +25,136 @@ const settings = ["Profile", "Home", "Logout"];
 const pages = ["Home", "About"];
 
 const navigations = {
+
   Home: { path: "/" },
+  About: { path: "/about" },
   Logout: { path: "/form" },
   Profile: { path: "/profile" },
-  Hackathons: { path: "/events" },
-  About: { path: "/about" },
-  Blog: { path: "/blog" },
+
 };
 
 function Navbar() {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [userData, setUserData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  let tokenOwner = ""
 
-  const [tokenOwner, setTokenOwner] = useState("");
 
   useEffect(() => {
+
     let dataToSend;
 
-    const patientToken = localStorage.getItem("unity-jwt-patient");
-    const doctorToken = localStorage.getItem("unity-jwt-doctor");
+    let patientToken = localStorage.getItem("unity-jwt-patient");
+    let doctorToken = localStorage.getItem("unity-jwt-doctor");
 
     if (patientToken || doctorToken) {
+
       dataToSend = {
+
         istoken: true,
         token: "",
         purpose: "verify",
         email: "",
         password: "",
+      
       };
 
       if (patientToken) {
+
         dataToSend.token = patientToken;
-        setTokenOwner("patient");
+        tokenOwner = "patient";
+      
       } else {
+      
         dataToSend.token = doctorToken;
-        setTokenOwner("doctor");
+        tokenOwner = "doctor";
+      
       }
 
       const fetchData = async () => {
+
         try {
-          const response = await axios.post(`${tokenOwner}/login`, dataToSend);
-          console.log(response)
-          const data = response.data[tokenOwner];
+
+          let response = await axios.post(`${tokenOwner}/login`, dataToSend);
+          // console.log(response)
+          let data = response.data[tokenOwner];
+
           setUserData(data);
 
-          // Saving to redux state for showing Loading page purpose only
-          dispatch(
-            setAuthenticated({
-              isAuthenticated: true,
-            })
-          );
+          // // Saving to redux state for showing Loading page purpose only
+          // dispatch(
+          //   setAuthenticated({
+          //     isAuthenticated: true,
+          //   })
+          // );
 
           setIsLoading(false);
+
         } catch (err) {
+
           setIsLoading(false);
           console.error("Error fetching user info:", err);
+        
         }
       };
+
       if (tokenOwner !== "") fetchData();
+    
     } else {
+
       setIsLoading(false);
+    
     }
-  }, [navigate, dispatch, tokenOwner]);
+
+  }, []);
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  // const handleLogout = () => {
-
-  //   localStorage.removeItem("unity-jwt-patient");
-  //   localStorage.removeItem("unity-jwt-doctor");
-  //   // window.location.reload();
-  // };
-
   const handleOpenNavMenu = (event) => {
+
     setAnchorElNav(event.currentTarget);
+  
   };
+
+
   const handleOpenUserMenu = (event) => {
+  
     !userData ? navigate("/form") : setAnchorElUser(event.currentTarget);
+  
   };
 
   const handleCloseNavMenu = () => {
+
     setAnchorElNav(null);
+  
   };
 
   const handleCloseUserMenu = () => {
+
     setAnchorElUser(null);
+  
   };
 
   const handleSettingClick = (e) => {
+
     const settingType = e.target.innerText;
-    console.log(settingType)
-    if (settingType === "Logout") {
-      localStorage.removeItem("unity-jwt-patient");
-      localStorage.removeItem("unity-jwt-doctor");
-      localStorage.removeItem("unity-patient-id");
-      localStorage.removeItem("unity-doctor-id");
+    
+    if (settingType === "LOGOUT" || settingType === "Logout") {
+
+      localStorage.clear();
       window.location.reload();
+
     } 
-    else if(settingType === "Home")
+    else if(settingType === "HOME" || settingType === "Home")
     {
       navigate('/')
     }
     else {
+
       let patient = localStorage.getItem("unity-patient-id")
       let doctor = localStorage.getItem("unity-doctor-id")
 
@@ -140,6 +164,22 @@ function Navbar() {
       navigate("/doctorDashboard");
       
     }
+
+  };
+  
+  const handlePageClick = (e) => {
+
+    const pageType = e.target.innerText;
+    
+    if(pageType === "HOME" || pageType === "Home")
+    {
+      navigate('/')
+    }
+    else 
+    {
+      navigate('/about')
+    }
+
   };
 
   return (
@@ -173,7 +213,7 @@ function Navbar() {
                   <img
                     src={Logo}
                     alt="alt text"
-                    style={{ height: "35px", width: "126px" }}
+                    style={{ height: "35px" }}
                   />
                 </Typography>
 
@@ -205,9 +245,9 @@ function Navbar() {
                     sx={{
                       display: { xs: "block", md: "none" },
                       "& .MuiPaper-root": {
-                        minHeight: "150px",
-                        background: "#4f5bff",
-                        minWidth: "150px",
+                        minHeight: "auto",
+                        background: "#471e75",
+                        minWidth: "auto",
                       },
                     }}
                   >
@@ -215,18 +255,17 @@ function Navbar() {
                       {pages.map((page) => (
                         <MenuItem
                           key={page}
-                          onClick={handleCloseNavMenu}
+                          onClick={handlePageClick}
                           sx={{
-                            width: "100%",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            margin: "auto",
+                            padding: "10px 40px",
+                            "&:hover": { bgcolor: "#893be3" }
                           }}
                         >
                           <Typography
                             textAlign="center"
-                            onClick={handleSettingClick}
                             sx={{ color: "white", fontWeight: 500 }}
                           >
                             {page}
@@ -256,15 +295,16 @@ function Navbar() {
                   <img
                     src={Logo}
                     alt="alt text"
-                    style={{ height: "35px", width: "126px" }}
+                    style={{ height: "35px" }}
                   />
                 </Typography>
+
                 <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                   {pages.map((page) => (
                     <Button
                       key={page}
-                      onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: "white", display: "block" }}
+                      onClick={handlePageClick}
+                      sx={{ borderRadius: 2, py: "5px", px: "20px", mx: 1, my: 2, color: "white", display: "block", "&:hover": { bgcolor: "#893be3" } }}
                     >
                       {page}
                     </Button>
@@ -286,12 +326,12 @@ function Navbar() {
                           }}
                         >
                           <VscAccount />
-                          <Typography sx={{ margin: "3px" }}>
-                            {userData.name || userData.name}
+                          <Typography sx={{ margin: "10px", fontWeight: "600"}}>
+                            {userData.name}
                           </Typography>
                         </Box>
                       ) : (
-                        <LaunchButton value={"Sign Up"} />
+                        <LaunchButton value={"Login"}/>
                       )}
                       {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
                     </Box>
@@ -300,9 +340,9 @@ function Navbar() {
                     sx={{
                       mt: "45px",
                       "& .MuiPaper-root": {
-                        minHeight: "150px",
-                        background: "#4f5bff",
-                        minWidth: "150px",
+                        minHeight: "auto",
+                        background: "#471e75",
+                        minWidth: "auto",
                       },
                     }}
                     id="menu-appbar"
@@ -320,7 +360,17 @@ function Navbar() {
                     onClose={handleCloseUserMenu}
                   >
                     {settings.map((setting) => (
-                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <MenuItem 
+                        key={setting} 
+                        onClick={handleCloseUserMenu}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          padding: "10px 40px",
+                          "&:hover": { bgcolor: "#893be3" }
+                        }}
+                      >
                         <Typography
                           onClick={handleSettingClick}
                           textAlign="center"

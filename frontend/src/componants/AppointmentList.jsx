@@ -20,8 +20,9 @@ export default function AppointmentList(props) {
     console.log("Props",props)
     // let data = props.value;
     const {data, deleteAppointment} = props;
-    console.log(data,"dataaaa")
-    const handleEvent = async (id) => {
+    
+    // console.log(data,"dataaaa")
+    // const handleEvent = async (id) => {
         // const dataToSend = {
         //     id: id
         // }
@@ -39,11 +40,11 @@ export default function AppointmentList(props) {
         // });
 
         // setData(newdata);
-    }
+    // }
 
-    useEffect(() => {
-        // Your async code here (if needed)
-    }, []);
+    // useEffect(() => {
+    //     // Your async code here (if needed)
+    // }, []);
 
     return (
         <section className="gradient-custom-2 vh-100">
@@ -105,6 +106,16 @@ export default function AppointmentList(props) {
                                                         // Add an onClick event handler for this action
                                                         onClick={() => handleEvent(items.id)}
                                                     /> */}
+                                                    <MDBIcon
+                                                        fas
+                                                        icon="edit"
+                                                        color="success"
+                                                        size="lg"
+                                                        className="me-3"
+                                                        // Add an onClick event handler for this action
+                                                        // onClick={() => handleEvent(items._id)}
+                                                        onClick={() => deleteAppointment(items._id)}
+                                                    />
                                                     <MDBIcon
                                                         fas
                                                         icon="trash-alt"

@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import DoctorList from "./DoctorList";
 import axios from "axios";
+import './search.css'
+import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import Footer from "./Footer";
+import Navbar from './Navbar';
+
 const Search = () => {
     const [doctors, setDoctors] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredDoctors, setFilteredDoctors] = useState([]);
+
+    
+    const navigate = useNavigate()
 
     useEffect(() => {
       const fetchData = async () => {
@@ -36,16 +45,21 @@ const Search = () => {
 
 
   return (
-    <div>
-      <h1>Doctor Directory</h1>
+    <>
+    <Navbar />
+    <div className="search-container">
+      <h1 className="title">Doctor's List</h1>
       <input
         type="text"
         placeholder="Search by name, location, or specialty"
         value={searchQuery}
         onChange={(e) => handleSearch(e.target.value)}
+        className="search-box"
       />
       <DoctorList doctors={filteredDoctors} />
     </div>
+      <Footer />
+    </>
   );
 };
 

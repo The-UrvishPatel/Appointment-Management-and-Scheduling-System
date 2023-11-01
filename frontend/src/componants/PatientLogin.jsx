@@ -138,7 +138,7 @@ export default function MDBPLogin() {
             <div className="error-message">Please provide the password</div>
           )
         ) : null}
-        <MDBBtn type="submit" className="mt-4" block>
+        <MDBBtn type="submit" className="mt-4" style={{backgroundColor: "#471e75", borderTopLeftRadius: "0px", borderTopRightRadius: "0px" }} block>
           {isLoading ? (
             <Vortex
               visible={true}
