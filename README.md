@@ -8,13 +8,13 @@ Designed a full stack Appointment Scheduling System featuring User Authenticatio
 ![Registration Page](https://raw.github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/registration.png)
 
 ## Doctor Profile Page
-![Doctor Profile Page](https://github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/doctor%20profile%20page.png)
+![Doctor Profile Page](https://github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/doctor_profile_page.png)
 
 ## Patient Profile Page
-![Patient Page](https://raw.github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/patient%20profile%20page.png)
+![Patient Page](https://raw.github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/patient_profile_page.png)
 
 ## Patient Landing Page
-![Patient Landing Page](https://raw.github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/patient%20landing%20page.png)
+![Patient Landing Page](https://raw.github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/patient_landing_page.png)
 
 ## Home Page
 ![Home Page](https://raw.github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/home.png)
@@ -23,7 +23,7 @@ Designed a full stack Appointment Scheduling System featuring User Authenticatio
 ![Search Page](https://raw.github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/Search.png)
 
 ## Slot Booking Page
-![Slot Booking Page](https://raw.github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/slot%20booking.png)
+![Slot Booking Page](https://raw.github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/slot_booking.png)
 
 ## Calendar Page
 ![Calendar Page](https://raw.github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/calendar.png)
