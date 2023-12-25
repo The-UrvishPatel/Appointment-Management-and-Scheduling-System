@@ -1,6 +1,17 @@
 # Appointment-Management-and-Scheduling-System
 Designed a full stack Appointment Scheduling System featuring User Authentication (registration, login), appointment booking, calendar integration, appointment cancellation, and doctor search. MERN stack, utilizing JWT for security, bcryptjs for password hashing, and mongoose for database management.
 
+
+
+How to run?
+Create two different terminals and open frontend and backend folder in them and run below commands in both:
+
+npm i
+npm start
+
+
+
+
 ## Login Page
 ![Login Page](https://raw.github.com/The-UrvishPatel/Appointment-Management-and-Scheduling-System/main/Screenshots/login.png)
 
