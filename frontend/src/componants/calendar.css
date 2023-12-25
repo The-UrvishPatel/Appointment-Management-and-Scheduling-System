@@ -1,0 +1,18 @@
+.calendar-container
+{
+    /* border: 2px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: #471e75;
+    font-weight: 600;
+}

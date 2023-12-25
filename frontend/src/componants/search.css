@@ -1,0 +1,59 @@
+.search-container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    min-height: 100vh;
+}
+
+.title
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #471e75;
+    font-weight: 600;
+}
+
+.search-box
+{
+    width: 80%;
+    height: 40px;
+    padding: 10px;
+    border: 2px solid rgb(71,30,117);
+    border-radius: 5px;
+}
+
+.search-box::placeholder
+{
+    color: rgba(71, 30, 117, 0.7);
+}
+
+.doctor-card-container
+{
+    /* border: 2px solid red; */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+}
+
+.doctor-card
+{
+    border: 2px solid #471e75;
+    padding: 20px;
+    color: #471e75;
+    border-radius: 10px;
+    margin: 20px;
+    width: 90%;
+}
+
+.doctor-card:hover
+{
+    cursor: pointer;    
+    background-color: rgba(71, 30, 117, 0.05);
+}
